@@ -1,0 +1,2 @@
+rootProject.name = "BinanceTracker"
+include ':app'
