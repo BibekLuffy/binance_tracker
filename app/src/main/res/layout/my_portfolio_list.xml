@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.enfiny.binancetracker.data.room.entity.MyPortfolio" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@{viewModel.isProfit?@color/profit:@color/loss}"
+        app:cardCornerRadius="5dp"
+        tools:backgroundTint="@color/profit"
+        tools:viewBindingIgnore="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@{viewModel.isProfit?@drawable/moon:@drawable/homeless}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/symbolName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/finger_paint"
+                android:text="@{viewModel.symbolB+viewModel.symbolS}"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="BTCUSDT" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/finger_paint"
+                android:lines="1"
+                android:text="@{@string/price+viewModel.symbol}"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.6"
+                tools:text="Price: 34444" />
+
+
+            <TextView
+                android:id="@+id/coinOwn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/finger_paint"
+                android:text="@string/total_coins_owned"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/symbolName" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/finger_paint"
+                android:lines="1"
+                android:text="@{viewModel.quantity}"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/symbolName"
+                app:layout_constraintWidth_percent="0.6"
+                tools:text="22" />
+
+            <TextView
+                android:id="@+id/costPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/finger_paint"
+                android:text="@string/cost_price"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/coinOwn" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/finger_paint"
+                android:lines="1"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/coinOwn"
+                app:layout_constraintWidth_percent="0.6"
+                tools:text="22" />
+
+            <TextView
+                android:id="@+id/sellPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/finger_paint"
+                android:text="@string/selling_price"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/costPrice" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/finger_paint"
+                android:lines="1"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white_all"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/costPrice"
+                app:layout_constraintWidth_percent="0.6"
+                tools:text="22" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

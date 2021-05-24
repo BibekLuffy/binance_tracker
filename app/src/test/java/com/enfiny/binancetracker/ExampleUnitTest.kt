@@ -1,4 +1,4 @@
-package com.enfiny.binancetracker
+package com.bibekluffy.binancetracker
 
 import org.junit.Test
 

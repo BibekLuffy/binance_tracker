@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -8,7 +11,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.enfiny.binancetracker"
+        applicationId "com.bibekluffy.binancetracker"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -30,6 +33,80 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            // Specifies a list of ABIs that Gradle should create APKs for.
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            // Specifies that we do not want to also generate a universal APK that includes all ABIs.
+            universalApk false
+        }
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+}
+
+ext.abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, x86: 3, x86_64: 4]
+
+import com.android.build.OutputFile
+
+// For each APK output variant, override versionCode with a combination of
+// ext.abiCodes * 1000 + variant.versionCode. In this example, variant.versionCode
+// is equal to defaultConfig.versionCode. If you configure product flavors that
+// define their own versionCode, variant.versionCode uses that value instead.
+android.applicationVariants.all { variant ->
+
+    // Assigns a different version code for each output APK
+    // other than the universal APK.
+    variant.outputs.each { output ->
+
+        // Stores the value of ext.abiCodes that is associated with the ABI for this variant.
+        def baseAbiVersionCode =
+                // Determines the ABI for this variant and returns the mapped value.
+                project.ext.abiCodes.get(output.getFilter(OutputFile.ABI))
+
+        // Because abiCodes.get() returns null for ABIs that are not mapped by ext.abiCodes,
+        // the following code does not override the version code for universal APKs.
+        // However, because we want universal APKs to have the lowest version code,
+        // this outcome is desirable.
+        if (baseAbiVersionCode != null) {
+
+            // Assigns the new version code to versionCodeOverride, which changes the version code
+            // for only the output APK, not for the variant itself. Skipping this step simply
+            // causes Gradle to use the value of variant.versionCode for the APK.
+            output.versionCodeOverride =
+                    baseAbiVersionCode * 1000 + variant.versionCode
+        }
+    }
+}
+
+
+ext {
+    kotlin_version = "1.5.0"
+    nav_version = "2.3.5"
+    hilt_version = '2.35.1'
+    retrofit_version = "2.9.0"
+    coroutines_version = '1.5.0-native-mt'
+    coroutines_core_version = '1.5.0-native-mt'
+    lifecycle_version = "2.3.1"
+    recyler_version = "1.2.0"
+    glide_version = "4.12.0"
+    flexbox_version = "2.0.1"
+    card_slider_version = "1.0.1"
+    circle_image_version = "3.1.0"
+    login_version = '5.0.0-alpha.2'
+    preference_version = "1.0.0-beta01"
+    room_version = "2.3.0"
 }
 
 dependencies {
@@ -39,7 +116,47 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    /*
+    External Dependencies
+    */
+//    Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+//    Retrofit and GSON and interceptor
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$login_version"
+//    Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+//    ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+//    Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+//    ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+//    RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$recyler_version"
+//    Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+//    FlexboxLayoutManager
+    implementation "com.google.android:flexbox:$flexbox_version"
+//    Carousel
+    implementation "com.github.IslamKhSh:CardSlider:$card_slider_version"
+//    Circle Image View
+    implementation "de.hdodenhof:circleimageview:$circle_image_version"
+//    Preferences
+    implementation "androidx.datastore:datastore-preferences:$preference_version"
+//    Room
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 }

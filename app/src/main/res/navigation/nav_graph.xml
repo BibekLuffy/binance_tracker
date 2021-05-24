@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/myPortfolioFragment">
+
+    <fragment
+        android:id="@+id/myPortfolioFragment"
+        android:name="com.enfiny.binancetracker.ui.binancelist.MyPortfolioFragment"
+        android:label="fragment_my_portfolio"
+        tools:layout="@layout/fragment_my_portfolio" >
+        <action
+            android:id="@+id/action_myPortfolioFragment_to_addPortfolioFragment"
+            app:destination="@id/addPortfolioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPortfolioFragment"
+        android:name="com.enfiny.binancetracker.ui.binancelist.AddPortfolioFragment"
+        android:label="fragment_add_portfolio"
+        tools:layout="@layout/fragment_add_portfolio" />
+</navigation>
