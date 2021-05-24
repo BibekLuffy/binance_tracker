@@ -1,15 +1,15 @@
 package com.enfiny.binancetracker.ui.binancelist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.enfiny.binancetracker.data.room.entity.MyPortfolio
+import com.enfiny.binancetracker.network.Resource
+import com.enfiny.binancetracker.network.response.PriceResponse
 import com.enfiny.binancetracker.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,5 +21,40 @@ class MyPortfolioViewModel @Inject constructor(
 
     fun insert(myPortfolio: MyPortfolio) = viewModelScope.launch {
         mainRepository.insert(myPortfolio)
+    }
+
+    fun update(myPortfolio: MyPortfolio) = viewModelScope.launch {
+        mainRepository.update(myPortfolio)
+    }
+
+    fun delete(pId: Int) = viewModelScope.launch {
+        mainRepository.delete(pId)
+    }
+
+
+    private val _priceResponse: MutableLiveData<Resource<PriceResponse>> =
+        MutableLiveData()
+    val priceResponse: LiveData<Resource<PriceResponse>>
+        get() = _priceResponse
+    val bS: MutableLiveData<String> = MutableLiveData("")
+    val sS: MutableLiveData<String> = MutableLiveData("")
+    val q: MutableLiveData<String> = MutableLiveData("")
+    val quantity: MutableLiveData<String> = MutableLiveData("")
+    val f: MutableLiveData<String> = MutableLiveData("")
+    val cP: MutableLiveData<String> = MutableLiveData("")
+    val loading: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isEdit: MutableLiveData<Boolean> = MutableLiveData(false)
+    val pId: MutableLiveData<Int> = MutableLiveData(0)
+
+
+    fun onDone() = viewModelScope.launch {
+        if (!loading.value!!) {
+            loading.value = true
+            _priceResponse.value = mainRepository.getPrice(
+                bS.value.toString()
+                    .uppercase(Locale.getDefault()) + sS.value.toString()
+                    .uppercase(Locale.getDefault())
+            )
+        }
     }
 }

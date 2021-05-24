@@ -11,12 +11,15 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/myPortfolioButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@{viewModel.isProfit?@color/profit:@color/loss}"
+        android:backgroundTint="@{viewModel.isProfit?@color/primary:@color/loss}"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="5dp"
-        tools:backgroundTint="@color/profit"
+        tools:backgroundTint="@color/primary"
         tools:viewBindingIgnore="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +29,21 @@
             android:paddingVertical="15dp">
 
             <ImageView
+                visibleGone="@{viewModel.isProfit}"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@{viewModel.isProfit?@drawable/moon:@drawable/homeless}"
+                android:src="@drawable/ic_moon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                visibleGone="@{!viewModel.isProfit}"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/homeless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +68,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/finger_paint"
                 android:lines="1"
-                android:text="@{@string/price+viewModel.symbol}"
+                android:text="@{@string/price+viewModel.price+viewModel.symbolS}"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/white_all"
                 android:textStyle="bold"
@@ -97,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/finger_paint"
-                android:text="@string/cost_price"
+                android:text="@string/amount_spent"
                 android:textColor="@color/white_all"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,6 +125,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/finger_paint"
                 android:lines="1"
+                android:text="@{viewModel.costP}"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/white_all"
                 android:textStyle="bold"
@@ -137,6 +153,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/finger_paint"
                 android:lines="1"
+                android:text="@{viewModel.sellP}"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/white_all"
                 android:textStyle="bold"

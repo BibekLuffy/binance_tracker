@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="add_portfolio">Add Portfolio</string>
-    <string name="my_portfolio">My Portfolio</string>
-    <string name="price">"Price "</string>
-    <string name="total_coins_owned">Total Coins owned</string>
-    <string name="selling_price">Selling Price</string>
-    <string name="cost_price">Cost Price</string>
+    <string name="done">Done</string>
 </resources>

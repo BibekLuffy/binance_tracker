@@ -19,7 +19,15 @@ class MainRepository @Inject constructor(
         dao.insert(myPortfolio)
     }
 
+    suspend fun update(myPortfolio: MyPortfolio) = withContext(Dispatchers.IO) {
+        dao.update(myPortfolio)
+    }
+
     suspend fun getPrice(symbol: String) = safeApiCall {
         api.getPrice(symbol)
+    }
+
+    suspend fun delete(pId: Int) = withContext(Dispatchers.IO) {
+        dao.delete(pId)
     }
 }

@@ -34,6 +34,10 @@ class BinanceListActivity : AppCompatActivity() {
         activityBinanceListBinding.mainDrawer.setupWithNavController(navController)
     }
 
+    fun openDrawer() {
+        activityBinanceListBinding.drawerLayout.openDrawer(GravityCompat.START)
+    }
+
     override fun onBackPressed() {
         if (activityBinanceListBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             activityBinanceListBinding.drawerLayout.closeDrawer(GravityCompat.START)

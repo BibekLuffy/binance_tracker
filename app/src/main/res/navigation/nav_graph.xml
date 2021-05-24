@@ -9,10 +9,53 @@
         android:id="@+id/myPortfolioFragment"
         android:name="com.enfiny.binancetracker.ui.binancelist.MyPortfolioFragment"
         android:label="fragment_my_portfolio"
-        tools:layout="@layout/fragment_my_portfolio" >
+        tools:layout="@layout/fragment_my_portfolio">
         <action
             android:id="@+id/action_myPortfolioFragment_to_addPortfolioFragment"
             app:destination="@id/addPortfolioFragment" />
+        <argument
+            android:name="symbolB"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="symbolS"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fee"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="priceOld"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="quantity"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="costP"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="sellP"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isEdit"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/addPortfolioFragment"

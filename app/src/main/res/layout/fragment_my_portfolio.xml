@@ -26,6 +26,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/menu"
                 android:paddingHorizontal="20dp"
                 android:src="@drawable/ic_menu"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -60,4 +61,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_container" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_my_protfolio"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,4 +9,14 @@
     <string name="total_coins_owned">Total Coins owned</string>
     <string name="selling_price">Selling Price</string>
     <string name="cost_price">Cost Price</string>
+    <string name="menu">menu</string>
+    <string name="bought_symbol">Bought Symbol</string>
+    <string name="sold_symbol">Sold Symbol</string>
+    <string name="in_btcbusd_bought_symbol_is_btc_and_sold_symbol_is_busd">Example: In BTCBUSD, bought symbol is BTC and sold symbol is BUSD. Bought Price is cost of 1 BTC in BUSD. Amount spent is total BUSD spent to buy BTC.</string>
+    <string name="bought_price">Bought Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="done">Done</string>
+    <string name="amount_spent">Amount spent</string>
+    <string name="fee">Fee</string>
+    <string name="add_my_protfolio">Add my protfolio</string>
 </resources>

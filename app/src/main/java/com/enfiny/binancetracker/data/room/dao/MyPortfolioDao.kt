@@ -12,6 +12,9 @@ interface MyPortfolioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(myportfolios: MyPortfolio)
 
-    @Delete
-    suspend fun delete(myportfolio: MyPortfolio)
+    @Query("DELETE FROM myportfolio WHERE id = :pId")
+    suspend fun delete(pId: Int)
+
+    @Update
+    suspend fun update(myportfolios: MyPortfolio)
 }
